@@ -52,10 +52,10 @@ class Game
         puts "Please enter 1-9:"
         input = @board.position(input)
         if @board.valid_move?(input)
-            current_player
+            current_player.move 
             @board.display
-        else
-          turn
+        # else
+        #   turn
         end
     end
 end
