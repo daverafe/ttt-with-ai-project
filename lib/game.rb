@@ -18,7 +18,7 @@ class Game
         @player_2 = player_2
     end
     def current_player
-        @player_1 || @player_2 
+        @board.turn_count % 2 == 0 ? @player_1 : @player_2
     end
     def won?
         WIN_COMBINATIONS.each do |win_combination|
@@ -50,12 +50,22 @@ class Game
     end
     def turn
         puts "Please enter 1-9:"
-        input = @board.position(input)
+        input = current_player.move(@board)
         if @board.valid_move?(input)
-            current_player.move 
-            @board.display
-        # else
-        #   turn
+            @board.update(input, current_player)
+        else
+          turn
         end
+    end
+    def play
+        until over?
+        turn
+      end
+      if won?
+            winner == "X" || winner == "O" 
+            puts "Congratulations #{winner}!" 
+        elsif draw?
+          puts "Cat's Game!"
+      end
     end
 end

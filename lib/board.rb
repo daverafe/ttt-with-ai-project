@@ -30,12 +30,12 @@ class Board
             return false
             elsif position(input) == "X" || position(input) == "O"
             return true 
-          end 
+        end 
     end
     def valid_move?(input)
         if input.to_i.between?(1, 9) && !taken?(input)
             return true
-          end
+        end
     end
     def update(position, player)
         @cells[position.to_i - 1] = player.token 
